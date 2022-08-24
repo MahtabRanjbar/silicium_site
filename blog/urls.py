@@ -1,9 +1,9 @@
-from msilib.schema import _Validation_records
-
 from django.urls import path
 
 from blog import views
 
+app_name = 'blog'
 urlpatterns = [
-    path('admin/', views.home, name='home'),
+    path('', views.home, name='home'),
+    path('article/<slug:slug>', views.detail_view, name='detail')
 ]
