@@ -13,5 +13,5 @@ def home(request):
 def detail_view(request, slug):
     query = Article.objects.get(slug=slug)
     context = {'article': query}
-    return render(request, 'blog/detail.html', context=context)
+    return render(request, 'blog/post.html', context=context)
     
