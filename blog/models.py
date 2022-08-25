@@ -13,6 +13,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['position']
+        verbose_name_plural = 'Categories'
 
 
 class Article(models.Model):
