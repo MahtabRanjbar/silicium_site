@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 
 from blog.models import Article
 
@@ -11,7 +11,7 @@ def home(request):
 
 
 def detail_view(request, slug):
-    query = Article.objects.get(slug=slug)
+    query = get_object_or_404(Article, slug=slug, status='p')
     context = {'article': query}
-    return render(request, 'blog/post.html', context=context)
+    return render(request, 'blog/detail.html', context=context)
     
