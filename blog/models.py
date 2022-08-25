@@ -14,6 +14,7 @@ class Category(models.Model):
     class Meta:
         ordering = ['position']
         verbose_name_plural = 'Categories'
+        
 
 
 class Article(models.Model):
@@ -33,3 +34,6 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-published_at']

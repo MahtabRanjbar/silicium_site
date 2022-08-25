@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 
-from blog.models import Article
+from blog.models import Article, Category
 
 
 # Create your views here.
 def home(request):
-    query = Article.objects.filter(status='p').order_by('-published_at')
-    context = {'articles': query}
+    articles = Article.objects.filter(status='p')
+    categories = Category.objects.filter(status=True)   
+    context = {'articles': articles,
+               'categories': categories}
     return render(request, 'blog/index.html', context)
 
 

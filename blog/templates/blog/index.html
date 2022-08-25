@@ -28,10 +28,13 @@
                         <h3 class="post-subtitle">{{article.description | truncatewords:30}}</h3>
                     </a>
                     <p class="post-meta">
-                        Posted by
-                        <a href="#!">{{article.author}}</a>
-                        on {{article.published_at}}
+                        Posted by <a href="#!">{{article.author}}</a> on {{article.published_at}}
                     </p>
+                    <div>
+                        {% for cat in article.category.all  %}
+                            <a href=#>#{{cat.title}} </a>
+                        {% endfor %}
+                    </div>
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
