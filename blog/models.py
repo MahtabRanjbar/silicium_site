@@ -2,6 +2,19 @@ from django.db import models
 from django.utils import timezone
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True, )
+    status = models.BooleanField(max_length=200, verbose_name='Be visible')
+    position = models.IntegerField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['position']
+
+
 class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'Draft'),
@@ -9,6 +22,7 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, )
+    category = models.ManyToManyField("blog.category")
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='images')
     published_at = models.DateTimeField(default=timezone.now)
