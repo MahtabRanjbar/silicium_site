@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 
 from blog.models import Article, Category
 
@@ -16,4 +16,9 @@ def detail_view(request, slug):
     query = get_object_or_404(Article, slug=slug, status='p')
     context = {'article': query}
     return render(request, 'blog/detail.html', context=context)
+    
+
+def category_view(request, slug):
+    context = {'categories': get_object_or_404(Category, status=True, slug=slug)}
+    return render(request, 'blog/category.html', context)
     

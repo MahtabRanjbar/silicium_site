@@ -14,7 +14,6 @@ class Category(models.Model):
     class Meta:
         ordering = ['position']
         verbose_name_plural = 'Categories'
-        
 
 
 class Article(models.Model):
@@ -24,7 +23,7 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, )
-    category = models.ManyToManyField("blog.category")
+    category = models.ManyToManyField("blog.category", related_name='article')
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='images')
     published_at = models.DateTimeField(default=timezone.now)
@@ -34,6 +33,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['-published_at']
+
