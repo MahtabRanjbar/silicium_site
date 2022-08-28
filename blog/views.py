@@ -13,12 +13,12 @@ def home(request):
 
 
 def detail_view(request, slug):
-    query = get_object_or_404(Article, slug=slug, status='p')
+    query = get_object_or_404(Article, slug=slug)
     context = {'article': query}
     return render(request, 'blog/detail.html', context=context)
     
 
 def category_view(request, slug):
-    context = {'categories': get_object_or_404(Category, status=True, slug=slug)}
+    context = {'categories': get_object_or_404(Category, slug=slug)}
     return render(request, 'blog/category.html', context)
     
