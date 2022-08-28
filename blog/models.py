@@ -2,6 +2,17 @@ from django.db import models
 from django.utils import timezone
 
 
+# managers
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status='p')
+
+
+class CategoryManager(models.Manager):
+    def published(self):
+        return self.filter(status=True)
+
+
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, )
@@ -14,6 +25,8 @@ class Category(models.Model):
     class Meta:
         ordering = ['position']
         verbose_name_plural = 'Categories'
+        
+    objects = CategoryManager()
 
 
 class Article(models.Model):
@@ -37,3 +50,4 @@ class Article(models.Model):
     class Meta:
         ordering = ['-published_at']
 
+    objects = ArticleManager()

@@ -21,7 +21,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for article in categories.article.all %}
+            {% for article in categories.article.published %}
                 <div class="post-preview">
                     <a href="{% url 'blog:detail' article.slug %}">
                         <h2 class="post-title">{{article.title}}</h2>
@@ -31,7 +31,7 @@
                         Posted by <a href="#!">{{article.author}}</a> on {{article.published_at}}
                     </p>
                     <div>
-                        {% for cat in article.ck.all  %}
+                        {% for cat in article.category.published %}
                             <a href=#>#{{cat.title}} </a>
                         {% endfor %}
                     </div>
