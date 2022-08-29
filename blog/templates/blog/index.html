@@ -43,7 +43,7 @@
             <div class="clearfix pager-botton mb-4 ml-4">
                 {% if articles.has_previous %}<a class="btn  btn-primary text-uppercase ml-2 " href="{% url 'blog:home' articles.previous_page_number %}">Older Posts →</a>{% endif %}
                 {% if articles.has_next %}<a class="btn btn-primary text-uppercase ml-4 " href="{% url 'blog:home' articles.next_page_number%}">Newer Posts →</a>{% endif %}
-                </div>
+            </div>
         </div>
     </div>
 </div>

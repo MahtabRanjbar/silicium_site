@@ -21,8 +21,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            <h3 class='alert alert-primary text-center' > {{categories.title}} </h3>
-            {% for article in categories.article.published %}
+            <h3 class='alert alert-primary text-center' > {{category.title}} </h3>
+            {% for article in articles %}
                 <div class="post-preview">
                     <a href="{% url 'blog:detail' article.slug %}">
                         <h2 class="post-title">{{article.title}}</h2>
@@ -41,7 +41,10 @@
                 <hr class="my-4" />
             {% endfor %}
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            <div class="clearfix pager-botton mb-4 ml-4">
+                {% if articles.has_previous %}<a class="btn  btn-primary text-uppercase ml-2 " href="{% url 'blog:category' category.slug articles.previous_page_number %}">Older Posts →</a>{% endif %}
+                {% if articles.has_next %}<a class="btn btn-primary text-uppercase ml-4 " href="{% url 'blog:category' category.slug articles.next_page_number%}">Newer Posts →</a>{% endif %}
+            </div>
         </div>
     </div>
 </div>
