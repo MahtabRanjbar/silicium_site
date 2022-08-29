@@ -12,7 +12,7 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ['-status', '-published_at']
 
     def category_to_str(self, obj):
-        return ", ".join([category.title for category in obj.category.all()])
+        return ", ".join([category.title for category in obj.category.published()])
     category_to_str.short_description = 'categories'
 
 
