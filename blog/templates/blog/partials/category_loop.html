@@ -1,0 +1,18 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> {{cat.title}}</a>
+    
+        <ul class="dropdown-menu fade-up">
+            {% for cat in cat.children.all  %}
+                <li>
+                    {% if cat.childern.all %}
+                        {% include 'blog/partials/category_loop.html' %}
+                    {% else %}
+                    <a class="dropdown-item bg-transparent " href="#"> {{cat.title}}</a>
+                    {% endif %}
+                    
+                </li>
+                
+            {% endfor %}
+        </ul>
+    
+</li> 

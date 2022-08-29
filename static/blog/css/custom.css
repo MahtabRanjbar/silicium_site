@@ -1,5 +1,51 @@
 #post-title {
     font-size: 40px;
     font-family: 'Times New Roman', Times, serif;
-    
+
+}
+
+@media all and (min-width: 992px) {
+    .navbar .dropdown-menu-end {
+        background-color: transparent;
+        right: 0;
+        left: auto;
+
+    }
+
+    .navbar .nav-item .dropdown-menu {
+        background-color: transparent;
+        Border: none;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        margin-top: 0;
+
+    }
+
+    .navbar .dropdown-menu.fade-down {
+        background-color: transparent;
+        top: 80%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+
+    }
+
+    .navbar .dropdown-menu.fade-up {
+        top: 180%;
+        background-color: transparent;
+
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        color: red ;
+   
+        background-image: none;
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+        transform: rotateX(0deg);
+        
+        
+    }
 }
