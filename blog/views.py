@@ -14,10 +14,12 @@ class ArticleList(ListView):
     paginate_by = 2
 
 
-def detail_view(request, slug):
-    query = get_object_or_404(Article, slug=slug)
-    context = {'article': query}
-    return render(request, 'blog/detail.html', context=context)
+class ArticleDetail(DeleteView):
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Article.objects.published(), slug=slug)
+    template_name = 'blog/detail.html'
+    context_object_name = 'article'
 
 
 def category_view(request, slug, page=1):
