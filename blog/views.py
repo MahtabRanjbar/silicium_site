@@ -1,20 +1,17 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.views.generic import DeleteView, ListView
 
 from blog.models import Article, Category
 
 
 # Create your views here.
 # based on FBV
-def home(request, page=1):
-    article_list = Article.objects.published()
-    categories = Category.objects.filter(status=True)
-
-    paginator = Paginator(article_list, 2)
-    articles = paginator.get_page(page)
-    context = {'articles': articles,
-               'categories': categories}
-    return render(request, 'blog/index.html', context)
+class ArticleList(ListView):
+    queryset = Article.objects.published()
+    template_name = 'blog/index.html'
+    context_object_name = 'articles'
+    paginate_by = 2
 
 
 def detail_view(request, slug):
