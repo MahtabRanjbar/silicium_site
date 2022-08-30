@@ -1,9 +1,11 @@
-from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.core.paginator import Paginator
+from django.shortcuts import get_list_or_404, get_object_or_404, render
+
 from blog.models import Article, Category
 
 
 # Create your views here.
+# based on FBV
 def home(request, page=1):
     article_list = Article.objects.published()
     categories = Category.objects.filter(status=True)
