@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 # managers
@@ -36,6 +37,7 @@ class Article(models.Model):
         ('p', 'Published')
     )
     title = models.CharField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     slug = models.SlugField(max_length=200, unique=True, )
     category = models.ManyToManyField("blog.category", related_name='article')
     description = models.TextField()
