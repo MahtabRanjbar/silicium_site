@@ -1,5 +1,5 @@
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> {{cat.title}}</a>
+    <a class="nav-link dropdown-toggle" href="{% url 'blog:category' cat.slug %}" "> {{cat.title}}</a>
     
         <ul class="dropdown-menu fade-up">
             {% for cat in cat.children.all  %}
@@ -7,7 +7,7 @@
                     {% if cat.childern.all %}
                         {% include 'blog/partials/category_loop.html' %}
                     {% else %}
-                    <a class="dropdown-item bg-transparent " href="#"> {{cat.title}}</a>
+                    <a class="dropdown-item bg-transparent " href="{% url 'blog:category' cat.slug %}"> {{cat.title}}</a>
                     {% endif %}
                     
                 </li>  
