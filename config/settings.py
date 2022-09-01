@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
+
+LOGIN_REDIRECT_URL = 'accounts:home'
+LOGIN_URL = 'accounts:login'
