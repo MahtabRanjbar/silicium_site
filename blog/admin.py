@@ -30,9 +30,7 @@ class ArticleAdmin(admin.ModelAdmin):
             message = f"{row_updated} story were"
         self.message_user(request, f"{message} successfully marked as published")
 
-    def category_to_str(self, obj):
-        return ", ".join([category.title for category in obj.category.published()])
-    category_to_str.short_description = 'categories'
+
 
 
 @admin.register(Category)
