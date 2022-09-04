@@ -1,5 +1,5 @@
 #from django.core.paginator import Paginator
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.generic import DeleteView, ListView
 
@@ -48,7 +48,7 @@ class AuthorList(ListView):
     def get_queryset(self):
         global author
         username = self.kwargs.get('username')
-        author = get_object_or_404(User, username=username)
+        author = get_object_or_404(CustomUser, username=username)
         return author.articles.published()
 
     def get_context_data(self, **kwargs):

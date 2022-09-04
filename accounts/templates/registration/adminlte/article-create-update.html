@@ -36,14 +36,16 @@
                     {{ form.published_at|as_crispy_field }}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                    {{ form.author|as_crispy_field }}
+                {% if user.is_superuser %}
+                    <div class="row">
+                        <div class="col-6">
+                        {{ form.author|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                        {{ form.status|as_crispy_field }}
+                        </div>
                     </div>
-                    <div class="col-6">
-                    {{ form.status|as_crispy_field }}
-                    </div>
-                </div>
+                {% endif %}
                 <button class="btn btn-success" type="submit"> create</button>
             </form>
         </div>

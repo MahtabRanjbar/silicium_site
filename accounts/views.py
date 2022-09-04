@@ -1,6 +1,6 @@
 from blog.models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from accounts.mixins import FieldsMixin
 from django.views.generic import CreateView, ListView
 
 
@@ -13,10 +13,10 @@ class ArticleList(LoginRequiredMixin, ListView):
         if self.request.user.is_superuser:
             return Article.objects.all() 
         else:
-            return Article.objects.filter(author=self.reuqest.user)
+            return Article.objects.filter(author=self.request.user)
 
 
-class ArticleCreate(LoginRequiredMixin, CreateView):
+class ArticleCreate(LoginRequiredMixin, FieldsMixin, CreateView):
     model = Article
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status' ]
     template_name = 'registration/adminlte/article-create-update.html'
@@ -25,4 +25,4 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
         if self.request.user.is_superuser:
             return Article.objects.all() 
         else:
-            return Article.objects.filter(author=self.reuqest.user)
+            return Article.objects.filter(author=self.request.user)
