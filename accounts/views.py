@@ -1,6 +1,6 @@
 from blog.models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin
-from accounts.mixins import FieldsMixin, AuthorAccessMixin
+from accounts.mixins import FieldsMixin, AuthorAccessMixin, SuperUserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
@@ -41,7 +41,8 @@ class ArticleUpdate(AuthorAccessMixin, FieldsMixin, UpdateView):
             return Article.objects.filter(author=self.request.user)
         
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(SuperUserAccessMixin, DeleteView):
     model = Article
     success_url = reverse_lazy('accounts:home')
+    template_name = 'registration/article_confirm_delete.html'
     
