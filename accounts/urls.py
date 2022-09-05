@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', auth_views.LoginView.as_view(), name='login'),
     path('', views.ArticleList.as_view(), name='home'),
     path('article/create', views.ArticleCreate.as_view(), name='article-create'),
+    path('article/update/<int:pk>', views.ArticleUpdate.as_view(), name='article-update'),
     
 ]
 
