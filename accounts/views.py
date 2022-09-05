@@ -1,7 +1,8 @@
 from blog.models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.mixins import FieldsMixin, AuthorAccessMixin
-from django.views.generic import CreateView, ListView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -38,3 +39,9 @@ class ArticleUpdate(AuthorAccessMixin, FieldsMixin, UpdateView):
             return Article.objects.all() 
         else:
             return Article.objects.filter(author=self.request.user)
+        
+
+class ArticleDelete(DeleteView):
+    model = Article
+    success_url = reverse_lazy('accounts:home')
+    
