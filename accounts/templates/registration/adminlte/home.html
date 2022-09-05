@@ -35,9 +35,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for article  in  articles %}
+                {% for article  in articles %}
                     <tr>
-                        <td>{{article.title}}</td>
+                        <td>
+                            {% if article.status == "d" or user.is_superuser%}
+                                <a href="{% url 'accounts:article-update' article.id %}">{{article.title}}</a>
+                            {% else %}
+                                {{article.title}}
+                            {% endif %}  
+                        </td>
                         <td>{{article.category_to_str}}</td>
                         <td>{{article.author.username}}</td>
                         <td>{{article.published_at}}</td>
