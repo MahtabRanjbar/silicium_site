@@ -57,10 +57,11 @@
                                 <a href="{% url 'accounts:article-delete' article.id %}"><i class="fa fa-trash" id="icon-delete" ></i></a>
                                 {% endif %}
                             </td>
-                            <td>
-                                {% if article.status == "d" or user.is_superuser%}
-                                <a href="{% url 'accounts:article-update' article.id %}"><i class="fa fa-edit" id='icon-edit' ></i></a>
+                            <td>  
+                                {% if article.status == "d"  or user.is_superuser %}
+                                <a href="{% url 'accounts:article-update' article.id %}"><i class="fa fa-edit" id='icon-edit' ></i></a>      
                                 {% endif %}
+                  
                             </td>
 
                         </tr>

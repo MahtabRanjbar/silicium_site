@@ -1,7 +1,7 @@
+from accounts.models import CustomUser
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from accounts.models import CustomUser
 
 
 # managers
@@ -46,7 +46,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=200, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='d')
 
     def __str__(self):
         return self.title

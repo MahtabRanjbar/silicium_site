@@ -22,6 +22,11 @@ class ArticleCreate(LoginRequiredMixin, FieldsMixin, CreateView):
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status']
     template_name = 'registration/adminlte/article-create-update.html'
     
+    success_url: 'accounts:home'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Article.objects.all() 
@@ -34,11 +39,7 @@ class ArticleUpdate(AuthorAccessMixin, FieldsMixin, UpdateView):
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status' ]
     template_name = 'registration/adminlte/article-create-update.html'
     
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Article.objects.all() 
-        else:
-            return Article.objects.filter(author=self.request.user)
+
         
 
 class ArticleDelete(SuperUserAccessMixin, DeleteView):
