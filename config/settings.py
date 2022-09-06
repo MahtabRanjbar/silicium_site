@@ -135,6 +135,8 @@ STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = 'accounts:home'
 LOGIN_URL = 'accounts:login'
 
+LOGOUT_REDIRECT_URL = 'accounts:login'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
