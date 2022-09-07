@@ -1,8 +1,8 @@
 #from django.core.paginator import Paginator
 from accounts.models import CustomUser
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.views.generic import DeleteView, ListView
-
+from django.views.generic import DeleteView, ListView, DetailView
+from accounts.mixins import AuthorAccessMixin
 from blog.models import Article, Category
 
 
@@ -15,13 +15,21 @@ class ArticleList(ListView):
     paginate_by = 2
 
 
-class ArticleDetail(DeleteView):
+class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug=slug)
     template_name = 'blog/detail.html'
     context_object_name = 'article'
 
+
+class ArticlePreview(AuthorAccessMixin, DetailView):
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk=pk)
+    template_name = 'blog/detail.html'
+    context_object_name = 'article'
+    
 
 class CategoryList(ListView):
     paginate_by = 2

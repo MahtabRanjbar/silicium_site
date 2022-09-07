@@ -63,6 +63,12 @@
                                 {% endif %}
                   
                             </td>
+                            <td>  
+                                {% if article.status == "d" %}
+                                <a href="{% url 'blog:preview' article.id %}"><i class="fa fa-eye" aria-hidden="true" id='icon-preview' ></i></a>      
+                                {% endif %}
+                  
+                            </td>
 
                         </tr>
                     {% endfor %}
