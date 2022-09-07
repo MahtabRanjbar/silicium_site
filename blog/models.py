@@ -48,6 +48,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_special = models.BooleanField(default=False, verbose_name='Special Article')
     status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='i')
 
     def __str__(self):

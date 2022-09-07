@@ -7,12 +7,12 @@ from django.shortcuts import get_object_or_404
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            self.fields = ['author', 'title', 'slug', 'category', 'description',
-                           'thumbnail', 'published_at', 'status' ]
+            self.fields = ['author', 'title', 'slug', 'category', 'description', 
+                           'thumbnail', 'published_at', 'is_special', 'status']
 
         elif request.user.is_author:
             self.fields = ['title', 'slug', 'category', 'description',
-                           'thumbnail', 'published_at']
+                           'thumbnail', 'is_special', 'published_at']
 
         else:
             raise Http404

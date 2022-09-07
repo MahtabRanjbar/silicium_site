@@ -5,7 +5,7 @@ from blog.models import Article, Category
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug', 'author', 'published_at', 'status', 'category_to_str']
+    list_display = ['title', 'slug', 'author', 'published_at', 'status','is_special', 'category_to_str']
     list_filter = ['published_at', 'status']
     search_fields = ['title', 'description']
     prepopulated_fields = {'slug': ('title',)}
