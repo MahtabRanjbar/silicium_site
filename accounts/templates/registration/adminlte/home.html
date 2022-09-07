@@ -32,6 +32,7 @@
                         <th>Author</th>
                         <th>Published Time</th>
                         <th>Status</th>
+                        <th>is_special</th>
                         <th>Description</th>
                     </tr>
                     </thead>
@@ -55,6 +56,13 @@
                                     <span class="badge badge-warning"> Back </span><br>
                                 {% endif %}
 
+                            </td>
+                            <td>
+                               {% if article.is_special %}
+                                    <i class="fa fa-check-circle" style="color:green"></i>
+                                {% else %}
+                                    <i class="fa fa-minus-circle" style="color:red"></i>
+                               {% endif %}
                             </td>
                             <td>{{article.description|striptags|truncatewords:"15"}}</td>
                             <td>
