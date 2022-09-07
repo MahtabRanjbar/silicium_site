@@ -46,8 +46,13 @@
                                 {% if article.status == "p" %}
                                     <span class="badge badge-success"> Published </span><br>
                                     <a class="badge badge-primary" target="blank"  href="{% url 'blog:detail' article.slug %}"> Show article in site</a>
-                                {% else %}
+                                {% elif article.status == "i" %}
+                                    <span class="badge badge-secondary"> Pending</span><br>
+
+                                {% elif article.status == "d" %}
                                     <span class="badge badge-danger"> Draft</span><br>   
+                                {% else %}
+                                    <span class="badge badge-warning"> Back </span><br>
                                 {% endif %}
 
                             </td>
@@ -58,13 +63,13 @@
                                 {% endif %}
                             </td>
                             <td>  
-                                {% if article.status == "d"  or user.is_superuser %}
+                                {% if article.status in "db"|make_list  or user.is_superuser %}
                                 <a href="{% url 'accounts:article-update' article.id %}"><i class="fa fa-edit" id='icon-edit' ></i></a>      
                                 {% endif %}
                   
                             </td>
                             <td>  
-                                {% if article.status == "d" %}
+                                {% if article.status in "db"|make_list or user.is_superuser %}
                                 <a href="{% url 'blog:preview' article.id %}"><i class="fa fa-eye" aria-hidden="true" id='icon-preview' ></i></a>      
                                 {% endif %}
                   

@@ -35,7 +35,9 @@ class Category(models.Model):
 class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'Draft'),
-        ('p', 'Published')
+        ('p', 'Published'),
+        ('i', 'Investigation'),
+        ('b', 'Back')
     )
     title = models.CharField(max_length=200)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='articles')
@@ -46,7 +48,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='d')
+    status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='i')
 
     def __str__(self):
         return self.title
