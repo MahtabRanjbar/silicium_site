@@ -6,12 +6,12 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from accounts.forms import ProfileForm
 from accounts.mixins import (AuthorAccessMixin, FieldsMixin,
-                             SuperUserAccessMixin)
+                             SuperUserAccessMixin, AuthorsAccessMixin)
 from accounts.models import CustomUser
 
 
 # Create your views here.
-class ArticleList(LoginRequiredMixin, ListView):
+class ArticleList(AuthorsAccessMixin, ListView):
     context_object_name = 'articles'
     template_name = 'registration/adminlte/home.html'
 
@@ -22,7 +22,7 @@ class ArticleList(LoginRequiredMixin, ListView):
             return Article.objects.filter(author=self.request.user)
 
 
-class ArticleCreate(LoginRequiredMixin, FieldsMixin, CreateView):
+class ArticleCreate(AuthorsAccessMixin, FieldsMixin, CreateView):
     model = Article
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status']
     template_name = 'registration/adminlte/article-create-update.html'

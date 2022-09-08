@@ -1,8 +1,8 @@
 from blog.models import Article
-from django.db import models
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-
+from django.shortcuts import redirect
 
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
@@ -29,6 +29,14 @@ class AuthorAccessMixin():
         return super().dispatch(request, *args, **kwargs)
 
 
+class AuthorsAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser or request.user.is_author:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('accounts:profile')
+   
+        
 class SuperUserAccessMixin():
     def dispatch(self, request, pk, *args, **kwargs):
         if request.user.is_superuser:
