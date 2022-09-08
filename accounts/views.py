@@ -1,7 +1,9 @@
 from blog.models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from accounts.forms import ProfileForm
 from accounts.mixins import (AuthorAccessMixin, FieldsMixin,
                              SuperUserAccessMixin)
@@ -26,7 +28,7 @@ class ArticleCreate(LoginRequiredMixin, FieldsMixin, CreateView):
     template_name = 'registration/adminlte/article-create-update.html'
 
     success_url = 'accounts:home'
-    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -65,3 +67,13 @@ class Profile(LoginRequiredMixin, UpdateView):
             'user': self.request.user
         })
         return kwargs
+
+
+class Login(LoginView):
+    def get_success_url(self) -> str:
+        user = self.request.user
+
+        if user.is_superuser or user.is_author:
+            return reverse_lazy("accounts:home")
+        else:
+            return reverse_lazy('accounts:profile')
