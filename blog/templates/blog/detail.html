@@ -23,7 +23,8 @@
                         {% if  user.is_authenticated and user.is_special_user  or user.is_superuser or user == article.author %}
                             {{article.description | safe | linebreaks}}
                         {% else %}
-                            <p> This is a special User. You have to <a href=#> buy Premium account</a> 
+                            {{article.description |striptags|truncatewords:20}}
+                            <p class='alert alert-warning'> This is a special User. You have to <a href="#" class='alert-link'> buy Premium account</a> 
                                 to access this article</p>        
                         {% endif %}
                     {% else %}
