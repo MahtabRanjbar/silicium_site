@@ -5,6 +5,7 @@ from accounts.mixins import FieldsMixin, AuthorAccessMixin, SuperUserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from accounts.models import CustomUser
+from accounts.forms import ProfileForm
 
 # Create your views here.
 class ArticleList(LoginRequiredMixin, ListView):
@@ -52,7 +53,7 @@ class ArticleDelete(SuperUserAccessMixin, DeleteView):
 class Profile(UpdateView):
     model = CustomUser
     template_name = 'registration/adminlte/profile.html'
-    fields = ['username', 'email', 'first_name', 'last_name', 'special_user_time', 'is_author']
+    form_class = ProfileForm
     success_url = reverse_lazy("accounts:home")
     
     def get_object(self) :
