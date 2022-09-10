@@ -20,6 +20,10 @@
                     <div class="col-6">
                     {{ form.email|as_crispy_field }}
                     </div>
+                    <div class="col-12">
+                        <label class='my-4'> Password: </label>
+                        <span> <a href="{% url 'accounts:password-change' %}"> Click here </a> to change password</span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">

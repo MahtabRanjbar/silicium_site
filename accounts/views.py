@@ -1,6 +1,6 @@
 from blog.models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
@@ -76,3 +76,8 @@ class Login(LoginView):
             return reverse_lazy("accounts:home")
         else:
             return reverse_lazy('accounts:profile')
+  
+        
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy('accounts:password-change-done')
+    template_name = 'accounts/registration/password_change.html'
