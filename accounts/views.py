@@ -5,8 +5,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from accounts.forms import ProfileForm
-from accounts.mixins import (AuthorAccessMixin, FieldsMixin,
-                             SuperUserAccessMixin, AuthorsAccessMixin)
+from accounts.mixins import (AuthorAccessMixin, AuthorsAccessMixin,
+                             FieldsMixin, FormValidMixin, SuperUserAccessMixin)
 from accounts.models import CustomUser
 
 
@@ -22,16 +22,10 @@ class ArticleList(AuthorsAccessMixin, ListView):
             return Article.objects.filter(author=self.request.user)
 
 
-class ArticleCreate(AuthorsAccessMixin, FieldsMixin, CreateView):
+class ArticleCreate(AuthorsAccessMixin, FieldsMixin, FormValidMixin, CreateView):
     model = Article
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status']
     template_name = 'registration/adminlte/article-create-update.html'
-
-    success_url = 'accounts:home'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -40,7 +34,7 @@ class ArticleCreate(AuthorsAccessMixin, FieldsMixin, CreateView):
             return Article.objects.filter(author=self.request.user)
 
 
-class ArticleUpdate(AuthorAccessMixin, FieldsMixin, UpdateView):
+class ArticleUpdate(AuthorAccessMixin, FieldsMixin, FormValidMixin, UpdateView):
     model = Article
     fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'published_at', 'status' ]
     template_name = 'registration/adminlte/article-create-update.html'
