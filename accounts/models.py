@@ -3,7 +3,9 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
 class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
     is_author = models.BooleanField(default=False)
     special_user_time = models.DateTimeField(default=timezone.now)
     
