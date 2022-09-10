@@ -80,4 +80,4 @@ class Login(LoginView):
         
 class PasswordChange(PasswordChangeView):
     success_url = reverse_lazy('accounts:password-change-done')
-    template_name = 'accounts/registration/password_change.html'
+    template_name = 'registration/password_change.html'
