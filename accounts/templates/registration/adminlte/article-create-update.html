@@ -45,6 +45,20 @@
                         {{ form.status|as_crispy_field }}
                         </div>
                     </div>
+                {% else %}
+                    <div class="col-6">
+                        <div id="div_id_status" class="form-group">
+                            <label for="id_status" class=" requiredField">
+                            Status<span class="asteriskField">*</span>
+                            </label>
+                            <div>
+                            <select name="status" class="select form-control" id="id_status">
+                                <option value="d">Draft</option>
+                                <option value="i" selected="">Send To Admin</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
                 <div class="row">
                     <div class="col-6">
