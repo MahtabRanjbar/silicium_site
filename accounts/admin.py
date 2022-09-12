@@ -12,9 +12,10 @@ UserAdmin.fieldsets[2][1]['fields'] = (
     'is_author',
     'special_user_time',
     'groups',
-    'user_permissions',
-    
+    'user_permissions',   
 )
+UserAdmin.fieldsets[3][1]["fields"] += ("profile_picture" ,)   
+
 UserAdmin.list_display += ('is_author', 'is_special_user')
         
 admin.site.register(CustomUser, UserAdmin)
