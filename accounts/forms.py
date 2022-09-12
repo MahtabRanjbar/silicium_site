@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 from accounts.models import CustomUser
 
@@ -8,7 +9,6 @@ class ProfileForm(forms.ModelForm):
         user = kwargs.pop('user')
         super(ProfileForm, self).__init__(*args, **kwargs)
         
-
         self.fields['username'].help_text = "Required Letters, digits and @/./+/-/_ only. "  # None
         if not user.is_superuser:
             self.fields['username'].disabled = True
@@ -19,6 +19,16 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'first_name', 'last_name', 'special_user_time', 'is_author']
+
+
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='Required')
+    
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'password1', 'password2')
+        
+        
 
 
 
