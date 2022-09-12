@@ -1,11 +1,23 @@
+import os
+from pathlib import Path
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+
+def upload_file_name(instance, filename):
+    """Return the location to upload the file."""
+
+    _, file_extension = os.path.splitext(filename)
+    return Path('users/', instance.username, 'profile_picture.png')
+
+
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
+    profile_picture = models.ImageField(upload_to=upload_file_name, null=True, blank=True)
     is_author = models.BooleanField(default=False)
     special_user_time = models.DateTimeField(default=timezone.now)
     
