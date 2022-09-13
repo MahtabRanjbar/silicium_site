@@ -1,4 +1,6 @@
 from accounts.models import CustomUser
+from comment.models import Comment
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -50,6 +52,7 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_special = models.BooleanField(default=False, verbose_name='Special Article')
     status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='i')
+    comments = GenericRelation(Comment)
 
     def __str__(self):
         return self.title

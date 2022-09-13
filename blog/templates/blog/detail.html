@@ -1,5 +1,10 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load comment_tags %}  {# Loading the template tag #}
+
+{% include_bootstrap %}
+
+
 {% block title %} {{article.title}} {% endblock title %}
 
 {% block main_content %}  
@@ -30,6 +35,8 @@
                     {% else %}
                         {{article.description | safe | linebreaks}}
                     {% endif %}
+                    {% render_comments article request %} 
+                    {% include_bootstrap %}
                     
                 </div>
             </div>

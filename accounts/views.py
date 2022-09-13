@@ -16,8 +16,9 @@ from accounts.mixins import (AuthorAccessMixin, AuthorsAccessMixin,
 from accounts.models import CustomUser
 from accounts.tokens import account_activation_token
 
-
 # Create your views here.
+
+
 class ArticleList(AuthorsAccessMixin, ListView):
     context_object_name = 'articles'
     template_name = 'registration/adminlte/home.html'
