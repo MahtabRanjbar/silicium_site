@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path ('', include('blog.urls')),
     path ('accounts/', include('accounts.urls')),
+    path('comment/', include('comment.urls')),
     
     # Reset Password
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
