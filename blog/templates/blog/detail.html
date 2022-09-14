@@ -1,11 +1,12 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load ratings %}
 {% load comment_tags %}  {# Loading the template tag #}
 
 {% include_bootstrap %}
 
 
-{% block title %} {{article.title}} {% endblock title %}
+{% block title %} {{article.title}}  {% endblock title %}
 
 {% block main_content %}  
     <!--Post Header -->
@@ -15,6 +16,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
                         <h1 class= 'title' id='post-title'> {{article.title}}</h1>
+                        {% ratings article %}   
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
                         {% endif %}
                     {% else %}
                         {{article.description | safe | linebreaks}}
-                    {% endif %}
+                    {% endif %}           
                     {% render_comments article request %} 
                     {% include_bootstrap %}
                     

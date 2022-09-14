@@ -24,6 +24,7 @@ urlpatterns = [
     path ('', include('blog.urls')),
     path ('accounts/', include('accounts.urls')),
     path('comment/', include('comment.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
     
     # Reset Password
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
