@@ -34,6 +34,8 @@ class Category(models.Model):
     objects = CategoryManager()
 
 
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField()
 class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'Draft'),
