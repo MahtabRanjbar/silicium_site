@@ -55,6 +55,7 @@ class Article(models.Model):
     is_special = models.BooleanField(default=False, verbose_name='Special Article')
     status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='i')
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IPAddress, blank=True, related_name="hits")
 
     def __str__(self):
         return self.title
