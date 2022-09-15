@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from blog.models import Article, Category
+from blog.models import Article, Category, IPAddress
 
 
+admin.site.register(IPAddress)
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'author', 'published_at', 'status','is_special', 'category_to_str']
@@ -39,6 +40,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
     search_fields = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
+    
+
 
 
 
