@@ -1,8 +1,9 @@
-#from django.core.paginator import Paginator
+from ipaddress import ip_address
+from accounts.mixins import AuthorAccessMixin
 from accounts.models import CustomUser
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.views.generic import DeleteView, ListView, DetailView
-from accounts.mixins import AuthorAccessMixin
+from django.views.generic import DeleteView, DetailView, ListView
+
 from blog.models import Article, Category
 
 
@@ -18,9 +19,15 @@ class ArticleList(ListView):
 class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
-        return get_object_or_404(Article.objects.published(), slug=slug)
+        article = get_object_or_404(Article.objects.published(), slug=slug)
+        ip_address = self.request.user.ip_address 
+        if ip_address not in article.hits.all():
+            article.hits.add(ip_address)
+        return article
     template_name = 'blog/detail.html'
     context_object_name = 'article'
+    
+ 
 
 
 class ArticlePreview(AuthorAccessMixin, DetailView):

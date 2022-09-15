@@ -43,6 +43,7 @@
                             <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}} </a>
                         {% endfor %}
                     </div>
+                    view: {{article.hits.count}}
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
