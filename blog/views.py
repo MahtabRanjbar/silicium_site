@@ -1,8 +1,7 @@
-from ipaddress import ip_address
 from accounts.mixins import AuthorAccessMixin
 from accounts.models import CustomUser
-from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.views.generic import DeleteView, DetailView, ListView
+from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView, ListView
 
 from blog.models import Article, Category
 
