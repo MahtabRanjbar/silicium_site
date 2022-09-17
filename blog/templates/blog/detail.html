@@ -2,47 +2,43 @@
 {% load static %}
 {% load ratings %}
 {% load comment_tags %}  {# Loading the template tag #}
-
 {% include_bootstrap %}
-
-
 {% block title %} {{article.title}}  {% endblock title %}
-
 {% block main_content %}  
-    <!--Post Header -->
-    <header class="masthead" style="background-image: url('{{article.thumbnail.url}}')">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                        <h1 class= 'title' id='post-title'> {{article.title}}</h1>
-                        {% ratings article %}  
-                        <div> views : {{ article.hits.count }}</div> 
-                    </div>
-                </div>
+<!--Post Header -->
+<header class="masthead" style="background-image: url('{{article.thumbnail.url}}')">
+   <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+         <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+               <h1 class= 'title' id='post-title'> {{article.title}}</h1>
+               {% ratings article %}  
+               <div> views : {{ article.hits.count }}</div>
             </div>
-        </div>
-    </header>
-    <article class="mb-4">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    {% if article.is_special %} 
-                        {% if  user.is_authenticated and user.is_special_user  or user.is_superuser or user == article.author %}
-                            {{article.description | safe | linebreaks}}
-                        {% else %}
-                            {{article.description |striptags|truncatewords:20}}
-                            <p class='alert alert-warning'> This is a special User. You have to <a href="#" class='alert-link'> buy Premium account</a> 
-                                to access this article</p>        
-                        {% endif %}
-                    {% else %}
-                        {{article.description | safe | linebreaks}}
-                    {% endif %}           
-                    {% render_comments article request %} 
-                    {% include_bootstrap %}
-                    
-                </div>
-            </div>
-        </div>
-    </article>
-{% endblock main_content %} 
+         </div>
+      </div>
+   </div>
+</header>
+<article class="mb-4">
+   <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+         <div class="col-md-10 col-lg-8 col-xl-7">
+            {% if article.is_special %} 
+            {% if  user.is_authenticated and user.is_special_user  or user.is_superuser or user == article.author %}
+            {{article.description | safe | linebreaks}}
+            {% else %}
+            {{article.description |striptags|truncatewords:20}}
+            <p class='alert alert-warning'> This is a special User. You have to <a href="#" class='alert-link'> buy Premium account</a> 
+               to access this article
+            </p>
+            {% endif %}
+            {% else %}
+            {{article.description | safe | linebreaks}}
+            {% endif %}           
+            {% render_comments article request %} 
+            {% include_bootstrap %}
+         </div>
+      </div>
+   </div>
+</article>
+{% endblock main_content %}
