@@ -38,14 +38,24 @@
     }
 
     .navbar .nav-item:hover .dropdown-menu {
-        color: red ;
-   
+        color: red;
+
         background-image: none;
         opacity: 1;
         visibility: visible;
         top: 100%;
         transform: rotateX(0deg);
-        
-        
+
+
     }
+}
+
+.popular_articles {
+    left: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    width: 240px;
+    position: absolute;
+    box-shadow: 5px 5px #eee;
 }
