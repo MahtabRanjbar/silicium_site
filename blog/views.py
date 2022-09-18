@@ -16,6 +16,7 @@ class ArticleList(ListView):
     queryset = Article.objects.published().annotate(
         count=Count("hits", filter=Q(articlehit__created_at__gt=last_month))
         ).order_by('-count', '-published_at')
+    queryset = Article.objects.published()
     template_name = 'blog/index.html'
     context_object_name = 'articles'
     paginate_by = 2
