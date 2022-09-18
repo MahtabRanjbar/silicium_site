@@ -78,6 +78,8 @@ class ArticleHit(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
 
 
 

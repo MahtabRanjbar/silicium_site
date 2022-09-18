@@ -1,5 +1,8 @@
+from datetime import datetime, timedelta
+
 from accounts.mixins import AuthorAccessMixin
 from accounts.models import CustomUser
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
@@ -9,7 +12,10 @@ from blog.models import Article, Category
 # Create your views here.
 # based on FBV
 class ArticleList(ListView):
-    queryset = Article.objects.published()
+    last_month = datetime.today() - timedelta(days=30)
+    queryset = Article.objects.published().annotate(
+        count=Count("hits", filter=Q(articlehit__created_at__gt=last_month))
+        ).order_by('-count', '-published_at')
     template_name = 'blog/index.html'
     context_object_name = 'articles'
     paginate_by = 2
